@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.2
+  sdk: '>=3.0.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -41,12 +41,31 @@ dependencies:
   firebase_core: ^4.2.1
   firebase_auth: ^6.1.2
   cloud_firestore: ^6.1.0
+  #ar_flutter_plugin_mk: ^1.5.0
+  #ar_flutter_plugin: ^0.7.3
+  #arcore_flutter_plugin: ^0.1.0
+  #model_viewer_plus: ^1.10.0
+  cached_network_image: ^3.2.3
+  flutter_svg: ^2.0.9
+  #webview_flutter_android: ^4.10.11
+  #webview_flutter_wkwebview: ^3.3.0
+ # webview_flutter: ^4.4.2
+ # webview_flutter_web: ^0.2.0+1
+  #ar_flutter_plugin: ^0.7.0
+  # Optional: For 3D models
+  vector_math: ^2.1.4
 
+  arcore_flutter_plugin: 0.1.0
+
+  arkit_plugin: ^1.0.1
+
+  url_launcher: ^6.1.17
+  permission_handler: ^12.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  google_fonts: ^6.0.0
+
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -54,7 +73,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

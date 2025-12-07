@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:neurotick/screens/login_screen.dart';
-import 'package:neurotick/screens/splash_screen.dart';
-import 'screens/home_screen.dart';
+import 'package:provider/provider.dart';
+import './screens/home_screen.dart';
+import './providers/app_provider.dart';
+import './screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,21 +23,30 @@ void main() async {
     print('❌ Firebase error: $e');
   }
 
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
+}
 
-    runApp(MyApp());
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
-  class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-  return MaterialApp(
-  title: 'NeuroTick',
-  theme: ThemeData(
-  primarySwatch: Colors.deepPurple, // Changed to match your app
-  useMaterial3: true,
-  ),
-  home: SplashScreen(), // Temporary - to test login
-  debugShowCheckedModeBanner: false,
-  );
+    return MaterialApp(
+      title: 'NeuroTick - Learn with AR',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        fontFamily: 'Poppins',
+        useMaterial3: true,
+      ),
+      home: SplashScreen(), // Start with splash screen
+    );
   }
-  }
+}

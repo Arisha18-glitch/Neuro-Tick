@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'ar_view_screen.dart';
+import 'ar_home_screen.dart';
 import '../models/fake_data.dart';
 
 class LibraryScreen extends StatefulWidget {
@@ -94,9 +94,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                              builder: (context) => ARViewScreen(
-                          topicName: topic.name,                    // FIX: Change conceptName to topicName
-                          topicDescription: topic.description,    ),
+                              builder: (context) => ARHomeScreen(
+                            ),
                         ),
                       );
                     },

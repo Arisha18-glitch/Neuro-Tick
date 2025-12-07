@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'ar_view_screen.dart';
+import 'ar_home_screen.dart';
 import '../services/progress_service.dart';
 
 class AssignmentsScreen extends StatefulWidget {
@@ -219,9 +219,7 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ARViewScreen(
-                topicName: 'Assignment Helper',
-                topicDescription: 'Use AR to visualize your assignment topics',
+              builder: (context) => ARHomeScreen(
               ),
             ),
           );

@@ -259,13 +259,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(height: 4),
-                  Text(
-                    'AR Learning Platform',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[600],
-                    ),
-                  ),
                 ],
               ),
             ],

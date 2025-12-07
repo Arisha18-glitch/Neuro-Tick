@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:neurotick/screens/notes_screen.dart';
+import 'package:neurotick/screens/profile_screen.dart';
+import 'package:neurotick/screens/qa_screen.dart';
 import '../widgets/input_cart.dart';
 import '../widgets/topic_chip.dart';
 import '../models/fake_data.dart';  // ADD THIS IMPORT
@@ -9,7 +11,7 @@ import 'login_screen.dart';
 import 'quiz_screen.dart'; // ADD THIS IMPORT
 import 'assignments_screen.dart'; // ADD THIS IMPORT
 import 'community_screen.dart'; // ADD THIS IMPORT
-import 'ar_view_screen.dart'; // ADD THIS IMPORT
+import 'ar_home_screen.dart'; // ADD THIS IMPORT
 import 'progress_screen.dart';
 import 'library_screen.dart';
 
@@ -38,21 +40,66 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 // ✅ Header
                 // ✅ Header
+                // ✅ Header
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Neuro Tick',
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
-                          color: Colors.indigo[900],
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Neuro Tick',
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                              color: Colors.indigo[900],
+                            ),
+                          ),
+                          Text(
+                            'Welcome!',
+                            style: GoogleFonts.poppins(
+                              fontSize: 12,
+                              color: Colors.indigo[700],
+                            ),
+                          ),
+                        ],
                       ),
                       Row(
                         children: [
+                          // Profile Button (this will include settings inside it)
+                          Hero(
+                            tag: 'profile_button',
+                            child: Material(
+                              color: Colors.transparent,
+                              child: IconButton(
+                                icon: Icon(Icons.person, color: Colors.indigo),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      transitionDuration: Duration(milliseconds: 500),
+                                      pageBuilder: (_, __, ___) => ProfileScreen(),
+                                      transitionsBuilder: (_, animation, __, child) {
+                                        return SlideTransition(
+                                          position: Tween<Offset>(
+                                            begin: Offset(1, 0),
+                                            end: Offset.zero,
+                                          ).animate(CurvedAnimation(
+                                            parent: animation,
+                                            curve: Curves.easeInOut,
+                                          )),
+                                          child: child,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                tooltip: 'Profile',
+                              ),
+                            ),
+                          ),
                           IconButton(
                             icon: Icon(Icons.analytics, color: Colors.indigo),
                             onPressed: () {
@@ -64,17 +111,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             tooltip: 'View Progress',
                           ),
                           IconButton(
-                            icon: Icon(Icons.logout, color: Colors.indigo), // 🆕 LOGOUT BUTTON
-                            onPressed: () => _logout(context), // 🆕 CALL LOGOUT METHOD
+                            icon: Icon(Icons.logout, color: Colors.indigo),
+                            onPressed: () => _logout(context),
                             tooltip: 'Logout',
-                          ),
-                          IconButton(
-                              icon: Icon(Icons.settings_rounded, color: Colors.indigo),
-                              onPressed: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Settings coming soon!')),
-                                );
-                              }
                           ),
                         ],
                       ),
@@ -178,77 +217,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ARViewScreen(
-                                  topicName: topic.name,
-                                  topicDescription: topic.description,
+                                builder: (context) => ARHomeScreen(
                                 ),
                               ),
-                            );
-                          },
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-
-                const SizedBox(height: 30),
-
-                // ✅ Recent Topics Section
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                        'Recent Topics',
-                        style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.indigo[900])
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                // ✅ Recent Topics List
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    children: FakeData.recentTopics.map((topic) {
-                      return Card(
-                        elevation: 4,
-                        margin: const EdgeInsets.only(bottom: 12),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                        child: ListTile(
-                          leading: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.teal[50],
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Icon(Icons.history, color: Colors.teal),
-                          ),
-                          title: Text(
-                            topic.name,
-                            style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(topic.description),
-                              SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  Icon(Icons.schedule, size: 12, color: Colors.grey),
-                                  SizedBox(width: 4),
-                                  Text(
-                                    topic.lastViewed,
-                                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Opening ${topic.name} in AR...')),
                             );
                           },
                         ),
@@ -270,8 +241,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           subtitle: 'Get AI-powered answers instantly',
                           color: Colors.indigo,
                           onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Ask a Question is clicked')),
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => QAScreen(), // Navigate to Q/A Screen
+                              ),
                             );
                           }
                       ),
