@@ -39,7 +39,7 @@ class QuizSubjectScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         onTap: () => onSubjectSelected(subject),
         child: Container(
-          height: 150,
+          height: 200,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
@@ -58,12 +58,16 @@ class QuizSubjectScreen extends StatelessWidget {
                 size: 40,
               ),
               const SizedBox(height: 12),
-              Text(
-                subject,
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+              // Fixed: Using FittedBox to prevent overflow
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  subject,
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const SizedBox(height: 8),

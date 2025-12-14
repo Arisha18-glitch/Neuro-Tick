@@ -254,17 +254,23 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                   _buildAnimatedSettingItem(
                     icon: Icons.dark_mode,
                     title: 'Dark Mode',
-                    trailing: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      child: Switch(
-                        key: ValueKey(_darkMode),
-                        value: _darkMode,
-                        activeColor: Colors.deepPurple,
-                        onChanged: (value) {
-                          setState(() => _darkMode = value);
-                          _saveSetting('darkMode', value);
-                        },
-                      ),
+                    trailing: Consumer<AppProvider>(
+                      builder: (context, appProvider, child) {
+                        return AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          child: Switch(
+                            key: ValueKey(appProvider.isDarkMode),
+                            value: appProvider.isDarkMode,
+                            activeColor: Colors.deepPurple,
+                            onChanged: (value) {
+                              // 1. Update Provider state
+                              appProvider.setDarkMode(value);
+                              // 2. Save to SharedPreferences
+                              _saveSetting('darkMode', value);
+                            },
+                          ),
+                        );
+                      },
                     ),
                   ),
                   _buildAnimatedSettingItem(

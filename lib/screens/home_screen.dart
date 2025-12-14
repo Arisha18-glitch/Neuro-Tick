@@ -57,13 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.indigo[900],
                             ),
                           ),
-                          Text(
-                            'Welcome!',
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              color: Colors.indigo[700],
-                            ),
-                          ),
                         ],
                       ),
                       Row(
@@ -127,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
                     image: const DecorationImage(
-                      image: NetworkImage('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=60'),
+                      image: AssetImage('assets/images/image.jpg'),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(24),
@@ -270,6 +263,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ARHomeScreen(
+              ),
+            ),
+          );
+        },
+        backgroundColor: Colors.indigo,
+        child: Icon(Icons.view_in_ar, color: Colors.white),
       ),
     );
   }

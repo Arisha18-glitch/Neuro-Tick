@@ -38,15 +38,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'NeuroTick - Learn with AR',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        fontFamily: 'Poppins',
-        useMaterial3: true,
-      ),
-      home: SplashScreen(), // Start with splash screen
+    return Consumer<AppProvider>(
+      builder: (context, appProvider, child) {
+        return MaterialApp(
+          title: 'NeuroTick - Learn with AR',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.deepPurple, // Light theme
+            fontFamily: 'Poppins',
+            useMaterial3: true,
+            brightness: Brightness.light,
+          ),
+          darkTheme: ThemeData(
+            primaryColor: Colors.deepPurple, // Dark theme - use primaryColor
+            fontFamily: 'Poppins',
+            useMaterial3: true,
+            brightness: Brightness.dark,
+            colorScheme: ColorScheme.dark(
+              primary: Colors.deepPurple,
+              secondary: Colors.purple,
+            ),
+          ),
+          themeMode: appProvider.themeMode, // This will control light/dark mode
+          home: SplashScreen(),
+        );
+      },
     );
   }
 }

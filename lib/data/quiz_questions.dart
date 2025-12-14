@@ -3226,7 +3226,7 @@ class QuizQuestions {
     {
       'question': 'What is 100 ÷ 25?',
       'options': ['2', '3', '4', '5'],
-      'correctAnswer': 3,
+      'correctAnswer': 4,
       'explanation': '100 ÷ 25 = 4.',
       'level': 1,
       'points': 10,
