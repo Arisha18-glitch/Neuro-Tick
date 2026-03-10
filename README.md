@@ -183,21 +183,13 @@ dependencies:
 4. Push to branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👥 Team
-- **Frontend Development**: [Your Name]
-- **UI/UX Design**: [Your Name/Team]
-- **AR Development**: [Your Name/Team]
-- **Backend Integration**: [Your Name/Team]
 
 ## 📞 Support
 For support, email  or create an issue in the repository.
 
 ---
 
-**Last Updated**: December 2024  
+**Last Updated**: December 2026  
 **Version**: 1.0.0  
-**Platform**: Android & iOS  
-**Minimum SDK**: Android 8.0 / iOS 12.0
+**Platform**: Android   
+**Minimum SDK**: Android 8.0 
